@@ -8,8 +8,8 @@ interface GridButtonProps {
 const GridButton = ({buttonTitle, buttonImg}: GridButtonProps) =>{
     return(
         <View style={styles.container}>
-            <Image source={buttonImg} style={{width: 50, height: 50}} />
-            <Text>{buttonTitle}</Text>
+            <Image source={buttonImg} style={{width: 80, height: 80}} />
+            <Text style={styles.title}>{buttonTitle}</Text>
         </View>
     )
 }
@@ -17,10 +17,11 @@ const GridButton = ({buttonTitle, buttonImg}: GridButtonProps) =>{
 const styles = StyleSheet.create({
     container: {
         width: '100%',
+        maxHeight: 80,
         flex: 1,
         gap: 10,
         padding: 30,
-        backgroundColor: '#effc7dff',
+        backgroundColor: '#fa987bff',
         borderColor: 'black',
         borderWidth: 2,
         borderRadius: 14,
@@ -28,12 +29,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     title: {
-        fontSize: 20,
+        fontSize: 12,
         fontWeight: 'bold',
-    },
-    link: {
-        marginTop: 15,
-        paddingVertical: 15,
     },
 });
 

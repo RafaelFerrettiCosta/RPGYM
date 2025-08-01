@@ -6,7 +6,6 @@ import notesImg from "../assets/images/notes.png";
 export default function DevMenu() {
   return (
     <>
-    <Text style={styles.title}>Dev Menu</Text>
     <View
       style={styles.container}
       >
@@ -46,7 +45,7 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     // backgroundColor: "#fff",
     alignItems: "flex-start",
-    // paddingTop: 20,
+    paddingTop: 10,
     gap: 10,
     justifyContent: "space-between",
   },
