@@ -1,4 +1,5 @@
 import { View, Text, Image, StyleSheet } from "react-native";
+import Colors from "@/styles/colors";
 
 interface GridButtonProps {
     buttonTitle: string;
@@ -21,7 +22,7 @@ const styles = StyleSheet.create({
         flex: 1,
         gap: 10,
         padding: 30,
-        backgroundColor: '#fa987bff',
+        backgroundColor: Colors.brandColor2,
         borderColor: 'black',
         borderWidth: 2,
         borderRadius: 14,
@@ -31,6 +32,7 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 12,
         fontWeight: 'bold',
+        color:"#FFFFFF"
     },
 });
 

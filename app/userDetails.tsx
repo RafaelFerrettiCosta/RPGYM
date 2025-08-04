@@ -4,6 +4,7 @@ export default function UserDetails() {
     return (
         <View style={styles.container}>
             <Text>User Details</Text>
+            
         </View>
     );
 }

@@ -11,8 +11,8 @@ export default function DevMenu() {
       >
 
       <View style={styles.item}>
-      <Link href="/userDetails" style={styles.link}>
-       <GridButton buttonTitle="Detalhes do Usuário" buttonImg={notesImg}/>
+      <Link href="/dashboard" style={styles.link}>
+       <GridButton buttonTitle="Dashboard" buttonImg={notesImg}/>
       </Link>
       </View>
       
