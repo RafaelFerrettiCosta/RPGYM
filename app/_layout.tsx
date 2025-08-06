@@ -1,3 +1,7 @@
+export const unstable_settings = {
+  initialRouteName: 'index',
+};
+
 import { Stack } from "expo-router";
 import {View, ActivityIndicator, Text, StyleSheet} from 'react-native'
 import Colors from '../styles/colors';
@@ -9,13 +13,17 @@ export default function RootLayout() {
     MontserratSemiBold: require('../assets/fonts/Montserrat-SemiBold.ttf'),
     MontserratBold: require('../assets/fonts/Montserrat-Bold.ttf'),
     MontserratThin: require('../assets/fonts/Montserrat-Thin.ttf'),
-  })
+  });
 
   if (!fontsLoaded) {
     return (
       <View style={styles.container}>
-        <ActivityIndicator size="large" color="#0000ff" />
-        <Text>Loading fonts...</Text>
+         <ActivityIndicator size="large" color={Colors.brandColor1} />
+        <Text style={{ marginTop: 8 }}>
+          {!fontsLoaded
+            ? "Carregando fontes..."
+            : "Fontes carregadas com sucesso!"}
+        </Text>
       </View>
     );
   }
@@ -37,6 +45,8 @@ export default function RootLayout() {
     <Stack.Screen name="index" options={{ title: "Dev Menu" }} />
     <Stack.Screen name="userDetails" options={{ title: "Detalhes do Usuário" }} />
     <Stack.Screen name="dashboard" options={{title: "Dashboard", headerShown:false}} />
+    <Stack.Screen name="Camera" options={{title: "Registro de Facial", headerShown:false}} />
+
 
   </Stack>
 

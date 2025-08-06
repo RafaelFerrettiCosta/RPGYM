@@ -20,6 +20,6 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingVertical: 40,
     paddingHorizontal: 20,
-    backgroundColor: Colors.background3,
+    backgroundColor: Colors.background5,
   },
 });

@@ -19,7 +19,7 @@ export default function Dashboard() {
     return (
         <HeaderlessContainer>
             <ScrollView contentContainerStyle={{ flexGrow: 1}} showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}>
-            <Text style={[styles.text, styles.title]}>BEM VINDO DE VOLTA!</Text>
+            {/* <Text style={[styles.text, styles.title]}>BEM VINDO DE VOLTA!</Text> */}
             <DashboardBox>
                 <Text style={[styles.text, styles.boxTitle]}>{userData}</Text>
             </DashboardBox>
@@ -48,7 +48,7 @@ export default function Dashboard() {
                 <Text style={[styles.text, styles.boxTitle]}>Eventos</Text>
             </DashboardBox>
             </ScrollView>
-            <CircularProgressBar onPress={() => {setUserData("alo")}} progress={10} size={120}/>
+            <CircularProgressBar onPress={() => {setUserData("alo")}} progress={60} currentLevel={45} size={120}/>
         </HeaderlessContainer>
     );
 }

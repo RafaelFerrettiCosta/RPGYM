@@ -7,8 +7,8 @@ const Colors = {
     background2:'#E9E9E9',
     background3:'#F3FFD6',
     background4:'#DEFE86',
+    background5:'#96e3ed',
     white:'#FFFFFF',
-
 };
 
 export default Colors;
