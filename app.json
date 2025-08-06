@@ -34,6 +34,12 @@
           "backgroundColor": "#ffffff"
         }
       ],
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow RPGYM to access your camera"
+        }
+      ],
       "expo-font"
     ],
     "experiments": {

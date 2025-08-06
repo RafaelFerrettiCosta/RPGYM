@@ -23,8 +23,8 @@ export default function DevMenu() {
       </View>
 
       <View style={styles.item}>
-      <Link href="/userDetails" style={styles.link}>
-       <GridButton buttonTitle="Detalhes do Usuário" buttonImg={notesImg}/>
+      <Link href="/cameraUsage" style={styles.link}>
+       <GridButton buttonTitle="Usar Camera" buttonImg={notesImg}/>
       </Link>
       </View>
 

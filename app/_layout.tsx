@@ -45,7 +45,7 @@ export default function RootLayout() {
     <Stack.Screen name="index" options={{ title: "Dev Menu" }} />
     <Stack.Screen name="userDetails" options={{ title: "Detalhes do Usuário" }} />
     <Stack.Screen name="dashboard" options={{title: "Dashboard", headerShown:false}} />
-    <Stack.Screen name="Camera" options={{title: "Registro de Facial", headerShown:false}} />
+    <Stack.Screen name="cameraUsage" options={{title: "Registro de Facial", headerShown:false}} />
 
 
   </Stack>
