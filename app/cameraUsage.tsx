@@ -117,7 +117,7 @@ export default function cameraUsage() {
       </Animated.View>
       <View style={styles.buttonContainer}>
         <Button title="Mudar Camera" onPress={toggleCameraFacing}></Button>
-        <Button title="Tirar Foto" onPress={takePicture}></Button>
+        <Button title="Tirar Foto🔥" onPress={takePicture}></Button>
       </View>
     </HeaderlessContainer>
   );
@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     // justifyContent: 'center',
     padding: 0,
-    backgroundColor: Colors.background4,
+    backgroundColor: Colors.brandColor1,
   },
 
   message: {},
