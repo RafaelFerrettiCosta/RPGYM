@@ -14,7 +14,7 @@ import { CameraView, CameraType, useCameraPermissions } from 'expo-camera';
 import { useContext, useEffect, useRef, useState } from 'react';
 import { Easing } from 'react-native';
 import Colors from '@/styles/colors';
-import IconCamera from '../assets/icons/camera2.png';
+import IconCamera from '../assets/icons/camera2white.png';
 import IconFlipCameraAndroid from '../assets/icons/flipCameraAndroid.png';
 import IconFlipCameraApple from '../assets/icons/flipCameraIOS.png';
 const screenHeight = Dimensions.get('window').height;
@@ -30,6 +30,7 @@ export default function cameraUsage() {
   const animatedBorderBottomRadius = useRef(new Animated.Value(0)).current;
   const animatedBorderTopRadius = useRef(new Animated.Value(50)).current;
   const animatedButtons = useRef(new Animated.Value(-80)).current;
+  const AnimatedTouchable = Animated.createAnimatedComponent(TouchableOpacity);
   // const translateY = useRef(new Animated.Value(200)).current;
 
   useEffect(() => {
@@ -154,23 +155,23 @@ export default function cameraUsage() {
           onCameraReady={() => setCameraReady(true)}
         ></CameraView>
       </Animated.View>
-      <TouchableOpacity
+      <AnimatedTouchable
         style={[styles.cameraButton, { bottom: animatedButtons }]}
         onPress={takePicture}
       >
         <Image source={IconCamera} style={{ width: 48, height: 48 }} />
-      </TouchableOpacity>
+      </AnimatedTouchable>
       {Platform.OS !== 'ios' && (
-        <TouchableOpacity
+        <AnimatedTouchable
           style={[styles.flipButton, { bottom: animatedButtons }]}
           onPress={toggleCameraFacing}
         >
           <Image source={IconFlipCameraAndroid} style={{ width: 32, height: 32 }} />
-        </TouchableOpacity>
+        </AnimatedTouchable>
       )}
       {Platform.OS === 'ios' && (
         <TouchableOpacity
-          style={[styles.flipButton, { bottom: animatedButtons }]}
+          style={[styles.flipButton, { position: 'absolute', bottom: animatedButtons }]}
           onPress={toggleCameraFacing}
         >
           <Image source={IconFlipCameraApple} style={{ width: 32, height: 32 }} />
@@ -186,7 +187,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     // justifyContent: 'center',
     padding: 0,
-    backgroundColor: Colors.brandColor1L5,
+    backgroundColor: Colors.white,
   },
 
   message: {},
@@ -211,7 +212,7 @@ const styles = StyleSheet.create({
     width: 120,
     height: 80,
     borderRadius: 50,
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.brandColor1,
     boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
   },
 
@@ -219,6 +220,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     // bottom: 22,
     right: 40,
+    marginBottom: 8,
     alignItems: 'center',
     justifyContent: 'center',
     width: 60,
