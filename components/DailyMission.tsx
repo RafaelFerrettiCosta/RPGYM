@@ -14,7 +14,8 @@ export default function DailyMission({ id }: DailyMissionProps) {
         missionId={id}
         progress={Math.floor(Math.random() * 100)}
         width={200}
-        height={12}
+        height={10}
+        hasSound={true}
       />
     </View>
   );

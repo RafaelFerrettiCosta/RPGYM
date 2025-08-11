@@ -1,12 +1,14 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { View, StyleSheet, Animated, Easing, ViewStyle } from 'react-native';
 import { useAudioPlayer } from 'expo-audio';
-import audioTick from '../assets/sounds/tick.mp3';
+import audioTick from '../assets/sounds/multick.mp3';
 import Colors from '@/styles/colors';
 type WidthProp = number | `${number}%` | '100%';
 
 interface ProgressBarProps {
   progress: number; // 0–100
+  progressColor?: string;
+  hasSound?: boolean;
   missionId?: number; // ms de atraso
   width?: WidthProp; // ex: 240, '100%'
   height?: number; // altura da barra
@@ -21,12 +23,13 @@ interface ProgressBarProps {
 
 export default function ProgressBar({
   progress,
+  progressColor = Colors.brandColor1,
   missionId = 0,
+  hasSound = false,
   width = '100%',
   height = 10,
-  color = Colors.brandColor1,
   backgroundColor = '#E6E6E6',
-  duration = 800,
+  duration = 8,
   rounded = true,
   reverse = false,
   trackStyle,
@@ -40,17 +43,31 @@ export default function ProgressBar({
   const clamped = useMemo(() => Math.max(0, Math.min(100, progress)), [progress]);
 
   useEffect(() => {
-    // audioPlayer.play();
-    // audioPlayer.seekTo(0);
     setTimeout(() => {
       Animated.timing(anim, {
         toValue: clamped,
-        duration,
+        duration: duration * progress + 200,
         easing: Easing.out(Easing.cubic),
         useNativeDriver: false, // largura não suporta native driver
       }).start();
-    }, missionId * 300);
-  }, [clamped, duration, anim]);
+
+      if (progress >= 5 && hasSound) {
+        try {
+          audioPlayer.seekTo(0);
+          audioPlayer.play();
+        } catch (e) {
+          console.log(e);
+        }
+        setTimeout(() => {
+          try {
+            audioPlayer.pause();
+          } catch (e) {
+            console.log(e);
+          }
+        }, duration * progress + 200);
+      }
+    }, missionId * 500);
+  }, [clamped, duration]);
 
   // converte % → pixels
   const animatedWidth = anim.interpolate({
@@ -76,7 +93,7 @@ export default function ProgressBar({
           styles.fill,
           {
             height,
-            backgroundColor: color,
+            backgroundColor: progressColor,
             borderRadius: rounded ? height / 2 : 0,
             width: animatedWidth,
             position: 'absolute',
