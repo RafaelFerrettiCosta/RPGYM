@@ -2,10 +2,11 @@ export const unstable_settings = {
   initialRouteName: 'index',
 };
 
-import { Stack } from "expo-router";
-import {View, ActivityIndicator, Text, StyleSheet} from 'react-native'
+import { Stack } from 'expo-router';
+import { View, ActivityIndicator, Text, StyleSheet } from 'react-native';
 import Colors from '../styles/colors';
-import {useFonts} from 'expo-font';
+import { useFonts } from 'expo-font';
+import { AppProvider } from '@/contexts/AppContext';
 
 export default function RootLayout() {
   const [fontsLoaded] = useFonts({
@@ -18,11 +19,9 @@ export default function RootLayout() {
   if (!fontsLoaded) {
     return (
       <View style={styles.container}>
-         <ActivityIndicator size="large" color={Colors.brandColor1} />
+        <ActivityIndicator size="large" color={Colors.brandColor1} />
         <Text style={{ marginTop: 8 }}>
-          {!fontsLoaded
-            ? "Carregando fontes..."
-            : "Fontes carregadas com sucesso!"}
+          {!fontsLoaded ? 'Carregando fontes...' : 'Fontes carregadas com sucesso!'}
         </Text>
       </View>
     );
@@ -31,36 +30,40 @@ export default function RootLayout() {
   (Text as any).defaultProps = (Text as any).defaultProps || {};
   (Text as any).defaultProps.style = { fontFamily: 'MontserratRegular' };
 
-  return <Stack 
-    screenOptions={{
-      headerStyle: {
-        backgroundColor: Colors.brandColor1,
-      },
-      headerTintColor: "#fff",
-      headerTitleStyle: {
-        fontWeight: "bold",
-      },
-    }}>
-
-    <Stack.Screen name="index" options={{ title: "Dev Menu" }} />
-    <Stack.Screen name="userDetails" options={{ title: "Detalhes do Usuário" }} />
-    <Stack.Screen name="dashboard" options={{title: "Dashboard", headerShown:false}} />
-    <Stack.Screen name="cameraUsage" options={{title: "Registro de Facial", headerShown:false}} />
-
-
-  </Stack>
-
+  return (
+    <AppProvider>
+      <Stack
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: Colors.brandColor1,
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}
+      >
+        <Stack.Screen name="index" options={{ title: 'Dev Menu' }} />
+        <Stack.Screen name="userDetails" options={{ title: 'Detalhes do Usuário' }} />
+        <Stack.Screen name="dashboard" options={{ title: 'Dashboard', headerShown: false }} />
+        <Stack.Screen
+          name="cameraUsage"
+          options={{ title: 'Registro de Facial', headerShown: false }}
+        />
+      </Stack>
+    </AppProvider>
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   montserrat: {
     fontSize: 20,
-    fontFamily: "Montserrat",
+    fontFamily: 'Montserrat',
   },
 });

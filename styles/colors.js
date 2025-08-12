@@ -48,6 +48,7 @@ const Colors = {
   background3: '#F3FFD6',
   background4: '#DEFE86',
   background5: '#96e3ed',
+  black: '#000000',
   white: '#FFFFFF',
 };
 

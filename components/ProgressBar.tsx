@@ -7,6 +7,7 @@ type WidthProp = number | `${number}%` | '100%';
 
 interface ProgressBarProps {
   progress: number; // 0–100
+  goal?: number;
   progressColor?: string;
   hasSound?: boolean;
   missionId?: number; // ms de atraso
@@ -23,13 +24,14 @@ interface ProgressBarProps {
 
 export default function ProgressBar({
   progress,
+  goal = 100,
   progressColor = Colors.brandColor1,
   missionId = 0,
   hasSound = false,
   width = '100%',
   height = 10,
   backgroundColor = '#E6E6E6',
-  duration = 8,
+  duration = 6,
   rounded = true,
   reverse = false,
   trackStyle,
