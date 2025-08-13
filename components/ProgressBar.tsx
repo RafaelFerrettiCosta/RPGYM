@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { View, StyleSheet, Animated, Easing, ViewStyle } from 'react-native';
+import { View, StyleSheet, Animated, Easing, ViewStyle, Text } from 'react-native';
 import { useAudioPlayer } from 'expo-audio';
 import audioTick from '../assets/sounds/multick.mp3';
 import Colors from '@/styles/colors';

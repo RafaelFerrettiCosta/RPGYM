@@ -38,28 +38,8 @@ export default function Dashboard() {
     if (!user?.dailyCheck || user.dailyCheck !== today) {
       const newList = buildDailies();
       setUser({ ...user, dailyCheck: today, dailyMissions: newList });
-      setDailies(newList);
     }
   }, []);
-
-  function getDailies(): Mission[] {
-    const loop = 3;
-    const numbers: number[] = [];
-
-    while (numbers.length < loop) {
-      const randomNumber = Math.floor(Math.random() * data.length);
-      if (!numbers.includes(randomNumber)) {
-        numbers.push(randomNumber);
-      }
-    }
-
-    numbers.forEach((item) => {
-      setDailies((dailies) => [...dailies, data[item]]);
-      //   dailies.push(data[item]);
-    });
-    console.log(dailies);
-    return dailies;
-  }
 
   function getDate() {
     const date = new Date();

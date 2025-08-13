@@ -1,14 +1,6 @@
 import { Mission } from '@/types/mission';
+import { User } from '@/types/user';
 import React, { createContext, useContext, useMemo, useState, useEffect } from 'react';
-
-export type User = {
-  id?: string;
-  name?: string;
-  email?: string;
-  dailyMissions: Mission[];
-  dailyCheck: string;
-  avatarUrl?: string;
-};
 
 type AppState = {
   initialized: boolean; // app já montou o contexto (pronto p/ render)
