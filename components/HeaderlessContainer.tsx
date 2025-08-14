@@ -1,6 +1,6 @@
-import React, { ReactNode } from "react";
-import { View, StyleSheet, ViewStyle, Text } from "react-native";
-import Colors from "@/styles/colors";
+import React, { ReactNode } from 'react';
+import { View, StyleSheet, ViewStyle, Text } from 'react-native';
+import Colors from '@/styles/colors';
 
 type HeaderlessContainerProps = {
   children: ReactNode;
@@ -9,17 +9,13 @@ type HeaderlessContainerProps = {
 };
 
 export default function HeaderlessContainer({ children, style, type }: HeaderlessContainerProps) {
-  return (
-    <View style={type !== 'camera'?[styles.container, style]: style}>
-      {children}
-    </View>
-  );
+  return <View style={type !== 'camera' ? [styles.container, style] : style}>{children}</View>;
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingVertical: 40,
+    paddingTop: 40,
     paddingHorizontal: 20,
     backgroundColor: Colors.background5,
   },

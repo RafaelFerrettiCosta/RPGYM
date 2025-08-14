@@ -126,6 +126,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: 20,
     justifyContent: 'flex-start',
+    marginBottom: 100,
   },
 
   streakContainer: {

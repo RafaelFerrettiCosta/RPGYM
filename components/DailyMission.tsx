@@ -1,5 +1,5 @@
-import { Text, View, StyleSheet } from 'react-native';
-import React from 'react';
+import { Text, View, StyleSheet, Animated, Easing } from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
 import ProgressBar from './ProgressBar';
 import data from '../data/dailyMissions';
 import { Mission } from '@/types/mission';
@@ -13,6 +13,23 @@ export default function DailyMission({ id, mission }: DailyMissionProps) {
   const [progress, setProgress] = React.useState(
     Math.floor((mission.userProgress / mission.goal) * 100),
   );
+  const animatedValue = useRef(new Animated.Value(0)).current;
+  const [displayedLevel, setDisplayedLevel] = useState(0);
+
+  useEffect(() => {
+    setTimeout(() => {
+      const id = animatedValue.addListener(({ value }) => {
+        setDisplayedLevel(Math.floor(value));
+      });
+
+      Animated.timing(animatedValue, {
+        toValue: mission.userProgress,
+        duration: progress * 6 + 200,
+        easing: Easing.out(Easing.cubic),
+        useNativeDriver: false,
+      }).start();
+    }, id * 500);
+  }, []);
 
   function translateMetric(metric: string) {
     switch (metric) {
@@ -39,7 +56,7 @@ export default function DailyMission({ id, mission }: DailyMissionProps) {
           height={10}
           hasSound={true}
         />
-        <Text style={styles.missionProgress}>{`${mission.userProgress} / ${
+        <Text style={styles.missionProgress}>{`${displayedLevel} / ${
           mission.goal
         } ${translateMetric(mission.metric)}`}</Text>
       </View>
