@@ -1,14 +1,15 @@
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet, ViewStyle } from 'react-native';
 import Colors from '@/styles/colors';
 import { ReactNode } from 'react';
 
 interface DashboardBoxProps {
   children: ReactNode;
+  style?: ViewStyle | ViewStyle[];
   // buttonImg: any;
 }
 
-const DashboardBox = ({ children }: DashboardBoxProps) => {
-  return <View style={styles.container}>{children}</View>;
+const DashboardBox = ({ children, style }: DashboardBoxProps) => {
+  return <View style={[styles.container, style]}>{children}</View>;
 };
 
 const styles = StyleSheet.create({

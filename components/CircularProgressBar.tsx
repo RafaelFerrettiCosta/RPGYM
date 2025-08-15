@@ -144,6 +144,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     bottom: 20,
     right: 10,
+    zIndex: 9,
   },
 
   levelContainer: {
@@ -154,6 +155,7 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
+    zIndex: 9,
   },
 
   span: {

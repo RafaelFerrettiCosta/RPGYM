@@ -38,6 +38,7 @@ export default function RootLayout() {
             backgroundColor: Colors.brandColor1,
           },
           headerTintColor: '#fff',
+          animation: 'fade',
           headerTitleStyle: {
             fontWeight: 'bold',
           },
@@ -46,6 +47,10 @@ export default function RootLayout() {
         <Stack.Screen name="index" options={{ title: 'Dev Menu' }} />
         <Stack.Screen name="userDetails" options={{ title: 'Detalhes do Usuário' }} />
         <Stack.Screen name="dashboard" options={{ title: 'Dashboard', headerShown: false }} />
+        <Stack.Screen
+          name="setTraining"
+          options={{ title: 'setTraining', headerShown: false, animation: 'none' }}
+        />
         <Stack.Screen
           name="cameraUsage"
           options={{ title: 'Registro de Facial', headerShown: false }}

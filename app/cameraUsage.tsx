@@ -97,7 +97,7 @@ export default function cameraUsage() {
           }),
         ]),
       ]).start();
-    }, 100);
+    }, 200);
   }, []);
 
   if (!cameraPermission) {

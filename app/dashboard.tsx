@@ -1,20 +1,36 @@
 import HeaderlessContainer from '@/components/HeaderlessContainer';
-import { use, useEffect, useState } from 'react';
+import { use, useEffect, useRef, useState } from 'react';
 import DailyMission from '@/components/DailyMission';
-import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  Image,
+  TouchableOpacity,
+  Animated,
+  Dimensions,
+} from 'react-native';
 import Colors from '@/styles/colors';
 import iconStreak from '@/assets/icons/streak.png';
 import iconWater from '@/assets/icons/water.png';
 import DashboardBox from '@/components/DashboardBox';
+import { router } from 'expo-router';
 import CircularProgressBar from '@/components/CircularProgressBar';
 import ProgressBar from '@/components/ProgressBar';
 import data from '../data/dailyMissions';
 import { useApp } from '@/contexts/AppContext';
 import { Mission } from '@/types/mission';
-import { get } from 'react-native/Libraries/TurboModule/TurboModuleRegistry';
 
 export default function Dashboard() {
+  const { width, height } = Dimensions.get('window');
   const today = String(new Date().getDate()).padStart(2, '0');
+
+  const textOpacity = useRef(new Animated.Value(1)).current;
+  const buttonWidth = useRef(new Animated.Value(200)).current;
+  const buttonHeight = useRef(new Animated.Value(60)).current;
+  const buttonBottomPosition = useRef(new Animated.Value(50)).current;
+  const buttonRightPosition = useRef(new Animated.Value(140)).current;
   const { user, setUser } = useApp();
   const cleanDate = getDate();
   const streakDays = 20;
@@ -28,6 +44,44 @@ export default function Dashboard() {
     return shuffled.slice(0, pick);
   }
 
+  function letsGetTraining() {
+    Animated.parallel([
+      Animated.timing(buttonWidth, {
+        toValue: 600, // cresce até cobrir a tela
+        duration: 500,
+        useNativeDriver: false,
+      }),
+      Animated.timing(buttonHeight, {
+        toValue: 1000,
+        duration: 500,
+        useNativeDriver: false,
+      }),
+      Animated.timing(buttonBottomPosition, {
+        toValue: -85,
+        duration: 500,
+        useNativeDriver: false,
+      }),
+      Animated.timing(buttonRightPosition, {
+        toValue: -120,
+        duration: 500,
+        useNativeDriver: false,
+      }),
+      Animated.timing(textOpacity, {
+        toValue: 0,
+        duration: 200,
+        useNativeDriver: true,
+      }),
+    ]).start(() => {
+      router.push('/setTraining');
+      setTimeout(() => {
+        buttonWidth.setValue(200);
+        buttonHeight.setValue(60);
+        buttonBottomPosition.setValue(50);
+        buttonRightPosition.setValue(140);
+        textOpacity.setValue(1);
+      }, 200);
+    });
+  }
   // 2) estado com lazy initializer e tipado
   const [dailies, setDailies] = useState<Mission[]>(() =>
     today === user?.dailyCheck ? user?.dailyMissions ?? [] : buildDailies(),
@@ -103,10 +157,11 @@ export default function Dashboard() {
         <DashboardBox>
           <Text style={[styles.text, styles.boxTitle]}>Eventos</Text>
         </DashboardBox>
-        <DashboardBox>
+        <DashboardBox style={{ marginBottom: 120 }}>
           <Text style={[styles.text, styles.boxTitle]}>{userData}</Text>
         </DashboardBox>
       </ScrollView>
+
       <CircularProgressBar
         onPress={() => {
           setUserData('alo');
@@ -115,6 +170,24 @@ export default function Dashboard() {
         currentLevel={45}
         size={120}
       />
+
+      <TouchableOpacity onPress={letsGetTraining} activeOpacity={1}>
+        <Animated.View
+          style={[
+            styles.buttonView,
+            {
+              width: buttonWidth,
+              height: buttonHeight,
+              bottom: buttonBottomPosition,
+              right: buttonRightPosition,
+            },
+          ]}
+        >
+          <Animated.Text style={[styles.buttonText, { opacity: textOpacity }]}>
+            Treino
+          </Animated.Text>
+        </Animated.View>
+      </TouchableOpacity>
     </HeaderlessContainer>
   );
 }
@@ -132,6 +205,23 @@ const styles = StyleSheet.create({
   streakContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+
+  buttonView: {
+    position: 'absolute',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: Colors.brandColor1,
+    padding: 10,
+    borderRadius: 40,
+    elevation: 15,
+    zIndex: 9999,
+  },
+
+  buttonText: {
+    color: Colors.white,
+    fontFamily: 'MontserratBold',
+    fontSize: 20,
   },
 
   waterContainer: {
