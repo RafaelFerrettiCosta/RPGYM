@@ -10,8 +10,10 @@ import {
   TouchableOpacity,
   Animated,
   Dimensions,
+  ViewStyle,
 } from 'react-native';
 import Colors from '@/styles/colors';
+import iconWaterCup from '@/assets/icons/waterCup.png';
 import iconStreak from '@/assets/icons/streak.png';
 import iconWater from '@/assets/icons/water.png';
 import DashboardBox from '@/components/DashboardBox';
@@ -31,6 +33,12 @@ export default function Dashboard() {
   const buttonHeight = useRef(new Animated.Value(60)).current;
   const buttonBottomPosition = useRef(new Animated.Value(50)).current;
   const buttonRightPosition = useRef(new Animated.Value(140)).current;
+  const splashWidth = useRef(new Animated.Value(71)).current;
+  const splashHeight = useRef(new Animated.Value(31)).current;
+  const splashTop = useRef(new Animated.Value(157)).current;
+  const splashRight = useRef(new Animated.Value(29)).current;
+  const [buttonPosition, setButtonPosition] = useState<ViewStyle['position']>('static');
+  const [splashDisplay, setSplashDisplay] = useState<ViewStyle['display']>('none');
   const { user, setUser } = useApp();
   const cleanDate = getDate();
   const streakDays = 20;
@@ -44,6 +52,41 @@ export default function Dashboard() {
     return shuffled.slice(0, pick);
   }
 
+  function letsDrinkWater() {
+    // setButtonPosition('absolute');
+    setSplashDisplay('flex');
+    Animated.parallel([
+      Animated.timing(splashWidth, {
+        toValue: 600,
+        duration: 500,
+        useNativeDriver: false,
+      }),
+      Animated.timing(splashHeight, {
+        toValue: 1000,
+        duration: 500,
+        useNativeDriver: false,
+      }),
+      Animated.timing(splashTop, {
+        toValue: -10,
+        duration: 500,
+        useNativeDriver: false,
+      }),
+      Animated.timing(splashRight, {
+        toValue: 0,
+        duration: 500,
+        useNativeDriver: false,
+      }),
+    ]).start(() => {
+      router.push('/waterMarkdown');
+      setTimeout(() => {
+        setSplashDisplay('none');
+        splashWidth.setValue(71);
+        splashHeight.setValue(31);
+        splashTop.setValue(157);
+        splashRight.setValue(29);
+      }, 200);
+    });
+  }
   function letsGetTraining() {
     Animated.parallel([
       Animated.timing(buttonWidth, {
@@ -127,8 +170,21 @@ export default function Dashboard() {
                 height={10}
               />
             </View>
-            <TouchableOpacity>
-              <Text>Adicionar</Text>
+            <TouchableOpacity onPress={letsDrinkWater}>
+              <Animated.View
+                style={[
+                  styles.waterButtonView,
+                  {
+                    width: 70,
+                    height: 30,
+                  },
+                ]}
+              >
+                <View style={styles.waterButtonHolder}>
+                  <Text style={styles.waterText}>+</Text>
+                  <Image source={iconWaterCup} style={{ width: 20, height: 20 }} />
+                </View>
+              </Animated.View>
             </TouchableOpacity>
           </View>
           <Text style={[styles.text, styles.miniTitle]}>Missões diárias</Text>
@@ -188,6 +244,18 @@ export default function Dashboard() {
           </Animated.Text>
         </Animated.View>
       </TouchableOpacity>
+      <Animated.View
+        style={[
+          styles.splash,
+          {
+            display: splashDisplay,
+            width: splashWidth,
+            height: splashHeight,
+            top: splashTop,
+            right: splashRight,
+          },
+        ]}
+      ></Animated.View>
     </HeaderlessContainer>
   );
 }
@@ -216,6 +284,37 @@ const styles = StyleSheet.create({
     borderRadius: 40,
     elevation: 15,
     zIndex: 9999,
+  },
+
+  splash: {
+    position: 'absolute',
+    borderRadius: 40,
+    backgroundColor: Colors.brandColor3,
+    zIndex: 99999,
+  },
+
+  waterButtonHolder: {
+    flexDirection: 'row',
+    gap: 4,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  waterButtonView: {
+    // position: 'absolute',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: Colors.brandColor3,
+    padding: 0,
+    borderRadius: 40,
+    elevation: 15,
+    zIndex: 9999,
+  },
+
+  waterText: {
+    color: Colors.white,
+    fontFamily: 'MontserratBold',
+    fontSize: 18,
   },
 
   buttonText: {

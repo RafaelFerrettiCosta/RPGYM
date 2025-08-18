@@ -48,6 +48,10 @@ export default function RootLayout() {
         <Stack.Screen name="userDetails" options={{ title: 'Detalhes do Usuário' }} />
         <Stack.Screen name="dashboard" options={{ title: 'Dashboard', headerShown: false }} />
         <Stack.Screen
+          name="waterMarkdown"
+          options={{ title: 'waterMarkdown', headerShown: false, animation: 'none' }}
+        />
+        <Stack.Screen
           name="setTraining"
           options={{ title: 'setTraining', headerShown: false, animation: 'none' }}
         />

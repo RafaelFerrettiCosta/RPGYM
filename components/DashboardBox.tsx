@@ -14,18 +14,15 @@ const DashboardBox = ({ children, style }: DashboardBoxProps) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
+    width: '96%',
+    marginLeft: '2%',
     height: 'auto',
     gap: 10,
     padding: 10,
     paddingBottom: 20,
     marginBottom: 20,
     backgroundColor: Colors.white,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.4,
-    shadowRadius: 4,
-    elevation: 3,
+    boxShadow: '0px 5px 6px rgba(0, 0, 0, 0.40)',
     borderRadius: 8,
     // alignItems: 'center',
     // justifyContent: 'center',
